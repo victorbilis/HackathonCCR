@@ -157,7 +157,7 @@ class _HomeState extends State<Home> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.all(0),
-                                          child: Text("Serviços",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
+                                          child: Text("Agendar",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
                                         )
                                       ],
                                     ),
