@@ -63,14 +63,14 @@ List<SliderModel> getSlides(){
   sliderModel = new SliderModel();
 
   //4
-  sliderModel.setDesc("Conecte seu relório e comece a ganhar pontos.");
+  sliderModel.setDesc("Conecte seu relório MI Band e comece a ganhar pontos.");
   sliderModel.setImageAssetPath("assets/tutorial4.png");
   slides.add(sliderModel);
 
   sliderModel = new SliderModel();
 
   //5
-  sliderModel.setDesc("Se não tiver o relógio, leia o QRCode");
+  sliderModel.setDesc("Se não tiver o relógio, leia o QR Code");
   sliderModel.setImageAssetPath("assets/tutorial5.png");
   slides.add(sliderModel);
 

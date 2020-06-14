@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:player/slides.dart';
 import 'dart:io';
+import 'qr_code1.dart';
+import 'mi_band.dart';
 
 class Tutorial extends StatefulWidget {
   @override
@@ -146,7 +148,15 @@ class _TutorialState extends State<Tutorial> {
           ),
         ): InkWell(
           onTap: (){
-            print("Get Started Now");
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Center( child:Text('Opções',style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+                  content: setupAlertDialoadContainer(),
+              );
+              }
+            );
           },
           child: Container(
             height:  60,
@@ -161,7 +171,38 @@ class _TutorialState extends State<Tutorial> {
       ),
     );
   }
-  
+  Widget setupAlertDialoadContainer() {
+    return Container(
+      height: 120.0, // Change as per your requirement
+      width: 150.0, // Change as per your requirement
+      child: ListView(
+        children: <Widget>[
+          ListTile(
+            title: Center(child:Text('MI Band',style: TextStyle(fontSize: 18,)),),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+              MaterialPageRoute(
+                  builder: (context) => MiBand())
+              );
+            },
+          ),
+          ListTile(
+            title: Center(child:Text('QR Code',style: TextStyle(fontSize: 18,)),),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+              MaterialPageRoute(
+                  builder: (context) => QrCode1())
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class SlideTile extends StatelessWidget {
@@ -189,3 +230,4 @@ class SlideTile extends StatelessWidget {
     );
   }
 }
+
