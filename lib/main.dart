@@ -8,6 +8,9 @@ import 'package:player/signup.dart';
 import 'package:player/caminhoneiro/main.dart';
 import 'package:player/utils/globals.dart' as globals;
 
+import 'caminhoneiro/carteira.dart';
+import 'utils/ethereum_utils.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -16,23 +19,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        indicatorColor: Colors.black
-      ),
+      theme:
+          ThemeData(primarySwatch: Colors.brown, indicatorColor: Colors.black),
+      routes: {
+        '/carteira': (context) => Home(),
+      },
       home: Home(),
     );
   }
 }
 
-class Home extends StatefulWidget{
-
+class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  
   TextEditingController cpfController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
@@ -40,50 +42,51 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     carregar_carteira();
+    Future.delayed(Duration.zero, () async {
+      var wallet = await EthereumUtils.createWallet();
+      print('pubkey=' + wallet['pubKey'].toString());
+      print('privkey=' + wallet['privKey'].toString());
+    });
   }
 
-  void carregar_carteira() async{
+  void carregar_carteira() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var pubKey = preferences.getString('pubKey');
     var privKey = preferences.getString('privKey');
-    if(pubKey == null){
+    if (pubKey == null) {
       var wallet = await EthereumUtils.createWallet();
       preferences.setString('pubKey', wallet['pubKey'].toString());
       preferences.setString('privKey', wallet['privKey'].toString());
       globals.pubKey = wallet['pubKey'].toString();
       globals.privKey = wallet['privKey'].toString();
-    }else{
+    } else {
       globals.pubKey = pubKey;
       globals.privKey = privKey;
       globals.name = preferences.getString('name');
-     /* Navigator.pushReplacement(context,
+      /* Navigator.pushReplacement(context,
       MaterialPageRoute(builder: (context) => CaminhoneiroMain()));*/
     }
     print(pubKey);
     print(privKey);
   }
 
-  void login() async{
-   var res = await EthereumUtils.getInformationFromContract(globals.privKey, 'login', [
-     cpfController.text,
-     passwordController.text
-   ]);
-  if(res[0] == true){
-    Navigator.pushReplacement(context,
-    MaterialPageRoute(builder: (context) => CaminhoneiroMain()));
-  }else{
-    AwesomeDialog(
-            context: context,
-            dialogType: DialogType.ERROR,
-            animType: AnimType.BOTTOMSLIDE,
-            tittle: 'Login inválido',
-            desc: 'Verifique suas credenciais',
-            btnCancelOnPress: () {
-            },
-            btnOkOnPress: () {
-            }).show();
-  }
-
+  void login() async {
+    var res = await EthereumUtils.getInformationFromContract(globals.privKey,
+        'login', [cpfController.text, passwordController.text]);
+    if (res[0] == true) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => CaminhoneiroMain()));
+    } else {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.ERROR,
+              animType: AnimType.BOTTOMSLIDE,
+              tittle: 'Login inválido',
+              desc: 'Verifique suas credenciais',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+    }
   }
 
   @override
@@ -172,8 +175,8 @@ class _HomeState extends State<Home> {
                       textAlign: TextAlign.center,
                     ),
                     onPressed: () {
-                 /*     */
-                          login();
+                      /*     */
+                      login();
                     },
                   ),
                 ],
@@ -213,8 +216,8 @@ class _HomeState extends State<Home> {
             Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                 "Não tem uma conta?",
-                 textAlign: TextAlign.center,
+                "Não tem uma conta?",
+                textAlign: TextAlign.center,
               ),
             ),
             Container(

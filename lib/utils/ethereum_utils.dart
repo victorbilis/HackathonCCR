@@ -16,7 +16,8 @@ class EthereumUtils {
     rootBundle.loadString(abiPath).then((abi) async {
       DeployedContract contract = DeployedContract(
           ContractAbi.fromJson(abi, "CCRSmartContract"),
-          EthereumAddress.fromHex("0x28833087bB1e1912B75B4C93787a64F7A724937C"));
+          EthereumAddress.fromHex(
+              "0x698138d624236E16940388906F3B0d8d2e85A8cE"));
       completer.complete(contract);
     });
     return completer.future;
@@ -90,6 +91,6 @@ class EthereumUtils {
     HashMap obj = HashMap();
     obj['privKey'] = ppk;
     obj['pubKey'] = add;
-     return obj;
+    return obj;
   }
 }
