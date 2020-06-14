@@ -41,7 +41,7 @@ class _OfertaComprarState extends State<OfertaComprar> {
                   children: <Widget>[
                     Container(
                       width: double.infinity,
-                      child: Image.network(widget.item.imageUrl),
+                      child: Image.asset('assets/background2.png'),
                     ),
                     Container(
                       width: double.infinity,
@@ -64,10 +64,10 @@ class _OfertaComprarState extends State<OfertaComprar> {
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold)),
-                                // Padding(
-                                //   padding: EdgeInsets.only(bottom: 20, top: 20),
-                                //   child: Image.asset('assets/kit-saude.png'),
-                                // ),
+                                 Padding(
+                                   padding: EdgeInsets.only(bottom: 20, top: 20),
+                                  child: Image.network(widget.item.imageUrl),
+                                 ),
                                 Text("Quantidade",
                                     style: TextStyle(fontSize: 16)),
                                 Padding(
