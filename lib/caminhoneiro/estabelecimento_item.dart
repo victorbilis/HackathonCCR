@@ -71,13 +71,15 @@ class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
                                      textAlign: TextAlign.center,
                                      style: TextStyle(fontSize: 16)), 
                                     ),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                    Wrap(
+                                     // crossAxisAlignment: CrossAxisAlignment.center,
+                                     // mainAxisAlignment: MainAxisAlignment.center,
+                                      alignment: WrapAlignment.center,
                                       children: <Widget>[
                                        Padding(padding: EdgeInsets.only(right: 15),
                                        child: Icon(Icons.location_on,size: 40),),
-                                       Text(widget.estabelecimento.location,style: TextStyle(fontSize: 18),)
+                                       
+                                       Text(widget.estabelecimento.location,style: TextStyle(fontSize: 18),textAlign: TextAlign.center,)
                                       ],
                                     ),
                                     Row(
@@ -154,7 +156,7 @@ class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
                                                   ),
                                                   onPressed: () {
                                                     Navigator.push(context,
-                                                        MaterialPageRoute(builder: (context) => Oferta()));
+                                                        MaterialPageRoute(builder: (context) => Oferta(estabelecimento: widget.estabelecimento,)));
                                                   },
                                                 ),
                                               ],

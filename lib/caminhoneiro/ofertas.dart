@@ -1,24 +1,77 @@
+import 'package:player/caminhoneiro/estabelecimento_item.dart';
 import 'package:flutter/material.dart';
 import 'oferta_item.dart';
+import 'package:player/utils/estabelecimento_model.dart';
+import 'package:player/utils/estabelecimento_item_model.dart';
+import 'package:player/utils/estabelecimento_voucher_model.dart';
+import 'package:player/utils/globals.dart' as globals;
+import 'package:player/utils/ethereum_utils.dart';
 
 class Oferta extends StatefulWidget {
+  EstabelecimentoModel estabelecimento;
+  Oferta({this.estabelecimento});
   @override
   _OfertaState createState() => _OfertaState();
 }
 
 class _OfertaState extends State<Oferta> with 
-TickerProviderStateMixin{
-  
+TickerProviderStateMixin{ 
+
+List<EstabelecimentoModel> estabelecimentos = List();
+List<EstabelecimentoItemModel> itens = List();
+List<EstabelecimentoVoucherModel> vouchers = List();
+
 List<Tab> tabList = List();
 TabController _tabController;
 @override
 void initState() {
    tabList.add(new Tab(text:'CCR COINS',));
-    tabList.add(new Tab(text:'VOUCHERS',));
+    tabList.add(new Tab(text:'OUTROS PRODUTOS',));
     _tabController = new TabController(vsync: this, length: 
     tabList.length);
 super.initState();
+//getVouchers();
+getOfertas();
 }
+
+void getVouchers() async {
+  var i = 0;
+  vouchers.clear();
+
+  var store = await EthereumUtils.getInformationFromContract(
+        globals.privKey, 'getStoreVouchers', [BigInt.from(i)]);
+  while(i < store[0].length){
+     vouchers.add(EstabelecimentoVoucherModel(
+        name: store[0][i][0],
+        price: double.parse(store[0][i][1].toString()),
+      ));
+    i++;
+  }
+  setState(() {
+    
+  });
+}
+
+
+void getOfertas() async {
+  var i = 0;
+  itens.clear();
+  var store = await EthereumUtils.getInformationFromContract(
+        globals.privKey, 'getStoreItems', [BigInt.from(i)]);
+  while(i < store[0].length){
+     itens.add(EstabelecimentoItemModel(
+        name: store[0][i][0],
+        price: double.parse(store[0][i][1].toString()),
+        imageUrl: store[0][i][2],
+        description: store[0][i][3]
+      ));
+    i++;
+  }
+  setState(() {
+    
+  });
+}
+
 @override
 void dispose() {
 _tabController.dispose();
@@ -36,17 +89,6 @@ super.dispose();
                   Positioned(
                   child: Container(
                   alignment: Alignment.center,
-                 /* decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [0, 0.5],
-                      colors: [
-                        Color(0xFFdfa409),
-                        Color(0XFF963521),
-                      ],
-                    )
-                  ),*/
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -75,7 +117,7 @@ super.dispose();
                                   children: <Widget>[
                                     Padding(
                                       padding: EdgeInsets.only(bottom: 20),
-                                      child: Image.asset('assets/restaurante.png'),
+                                      child: Image.network(widget.estabelecimento.imageUrl),
                                     ),
                                    Container(
                                       decoration: BoxDecoration(color: Colors.white),
@@ -144,54 +186,35 @@ super.dispose();
 Widget _getPage(Tab tab){
   switch(tab.text){
     case 'CCR COINS': return Container(
-                      height: MediaQuery.of(context).size.height,
-                      child: ListView(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text('Kit Saúde',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                            subtitle: Text('lorem ipsum'),
-                            trailing: Text('CCR 50,00',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
-                            onTap: () {
+                    //  height: MediaQuery.of(context).size.height,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: itens.length,
+                        itemBuilder: (context,index){
+                          return ListTile(
+                            title: Text(itens[index].name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                            trailing: Text('CCR ' + itens[index].price.toString(),style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
+                            onTap: () {  
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => OfertaItem()));
+                                  MaterialPageRoute(builder: (context) => OfertaItem(item: itens[index],)));
                             }
-                          ),
-                          ListTile(
-                            title: Text('Kit Saúde',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                            subtitle: Text('lorem ipsum'),
-                            trailing: Text('CCR 50,00',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => OfertaItem()));
-                            }
-                          ),
-                        ],
-                      ),
+                          );
+                        })
                     );
-    case 'VOUCHERS': return Container(
+    case 'OUTROS PRODUTOS': return Container(
                       height: MediaQuery.of(context).size.height,
-                      child: ListView(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text('Refeição Saudável',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                            subtitle: Text('lorem ipsum'),
-                            trailing: Text('R\$ 50,00',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
+                      child: ListView.builder(
+                        itemCount: vouchers.length,
+                        itemBuilder: (context,index){
+                          return ListTile(
+                            title: Text(vouchers[index].name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                            trailing: Text('R\$ ' + vouchers[index].price.toString(),style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) => OfertaItem()));
                             }
-                          ),
-                          ListTile(
-                            title: Text('Kit Saúde',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                            subtitle: Text('lorem ipsum'),
-                            trailing: Text('R\$ 50,00',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0XFF963521)),),
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => OfertaItem()));
-                            }
-                          ),
-                        ],
-                      ),
+                          );
+                        })
                     );
   }
 }

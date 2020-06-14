@@ -16,7 +16,7 @@ class EthereumUtils {
     rootBundle.loadString(abiPath).then((abi) async {
       DeployedContract contract = DeployedContract(
           ContractAbi.fromJson(abi, "CCRSmartContract"),
-          EthereumAddress.fromHex("0x097D454DfB57C635c1c0Bf02b5bd12c2635e44Fe"));
+          EthereumAddress.fromHex("0x28833087bB1e1912B75B4C93787a64F7A724937C"));
       completer.complete(contract);
     });
     return completer.future;

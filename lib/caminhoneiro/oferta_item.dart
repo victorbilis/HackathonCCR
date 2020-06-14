@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'oferta_comprar.dart';
-
+import 'package:player/utils/estabelecimento_item_model.dart';
+ 
 class OfertaItem extends StatefulWidget {
+  EstabelecimentoItemModel item;
+  OfertaItem({this.item});
   @override
   _OfertaItemState createState() => _OfertaItemState();
 }
@@ -56,18 +59,18 @@ class _OfertaItemState extends State<OfertaItem> {
                                   children: <Widget>[
                                     Padding(
                                       padding: EdgeInsets.only(bottom: 10),
-                                      child: Image.asset('assets/kit-saude.png'),
+                                      child: Image.network(widget.item.imageUrl),
                                     ),
-                                    Text("Kit Saúde",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                                    Text(widget.item.name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                                     Padding(
                                      padding: EdgeInsets.all(10),
-                                     child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                                     child: Text(widget.item.description,
                                      textAlign: TextAlign.center,
                                      style: TextStyle(fontSize: 16)), 
                                     ),
                                     Padding(
                                       padding: EdgeInsets.all(16),
-                                      child: Text("CCR 50,00",style: TextStyle(fontSize: 30,color: Color(0XFF963521)),)
+                                      child: Text("CCR " + widget.item.price.toString(),style: TextStyle(fontSize: 30,color: Color(0XFF963521)),)
                                     ),
                                     Padding(
                                           padding: EdgeInsets.all(10),
