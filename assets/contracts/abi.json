@@ -133,6 +133,113 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "storeType",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "rating",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "imageUrl",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "telefone",
+				"type": "string"
+			}
+		],
+		"name": "insertStore",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "itemName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint152",
+				"name": "itemPrice",
+				"type": "uint152"
+			}
+		],
+		"name": "insertStoreItem",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "itemName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint152",
+				"name": "itemPrice",
+				"type": "uint152"
+			}
+		],
+		"name": "insertVoucherItem",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "receiver",
 				"type": "address"
@@ -283,6 +390,129 @@
 				"internalType": "uint8",
 				"name": "",
 				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getStore",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "storeType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "rating",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageUrl",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "telefone",
+						"type": "string"
+					}
+				],
+				"internalType": "struct CCRToken.Store",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getStoreItems",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint152",
+						"name": "price",
+						"type": "uint152"
+					}
+				],
+				"internalType": "struct CCRToken.StoreItem[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getStoreVouchers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint152",
+						"name": "price",
+						"type": "uint152"
+					}
+				],
+				"internalType": "struct CCRToken.StoreVoucher[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",

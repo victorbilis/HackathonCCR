@@ -10,11 +10,17 @@ class CaminhoneiroMain extends StatefulWidget {
 class _CaminhoneiroMainState extends State<CaminhoneiroMain> {
 
   int _selectedIndex = 0;
+  int _selectedIndex2 = 0;
 
   final List<Widget> _widgetOptions = [
     Home(),
     Auto()
   ];
+
+   _onSelectItem(int index) {
+    setState(() => _selectedIndex2 = index);
+    Navigator.of(context).pop();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -26,6 +32,32 @@ class _CaminhoneiroMainState extends State<CaminhoneiroMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:  _widgetOptions.elementAt(_selectedIndex),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Cabeçalho'),
+              decoration: BoxDecoration(
+                color: Color(0XFF963521),
+              ),
+            ),
+            ListTile(
+              title: Row(children: <Widget>[
+                Icon(
+                  Icons.exit_to_app,
+                  color: Colors.black,
+                  size: 24.0,
+                ),
+                Text(" Sair",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)
+              ],),
+              onTap: () {
+                _onSelectItem(0);
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: Container(
       decoration: BoxDecoration(
         border: Border.all(

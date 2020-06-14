@@ -5,6 +5,7 @@ import 'servicos.dart';
 import 'estabelecimento.dart';
 import 'package:player/utils/globals.dart' as globals;
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
+import 'package:player/scanner.dart';
 
 class Carteira extends StatefulWidget {
   @override
@@ -17,10 +18,10 @@ class _CarteiraState extends State<Carteira> {
   void getSaldo() async{
     var balance = await EthereumUtils.getInformationFromContract(globals.privKey, 'myBalance', []);
     print(balance);
+    FlutterMoneyFormatter fmf = FlutterMoneyFormatter(
+      amount: double.parse(balance[0].toString())
+    );
     setState(() {
-      FlutterMoneyFormatter fmf = FlutterMoneyFormatter(
-        amount: double.parse(balance[0].toString())
-      );
       saldo = fmf.output.nonSymbol;
     });
   }
@@ -137,10 +138,10 @@ class _CarteiraState extends State<Carteira> {
 
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Servico())
+                                          builder: (context) => Scanner())
                                       );
                                 },
                                 child:Padding(

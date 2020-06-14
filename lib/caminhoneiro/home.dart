@@ -221,6 +221,22 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+              Positioned(
+                  child:  Padding(
+                    padding: EdgeInsets.only(top:20),
+                    child:Container(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        iconSize: 40,
+                        icon: Icon(Icons.menu),
+                        color: Colors.white,
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                      ),
+                    )
+                  ),
+                ),
               ],
             ),
           ),

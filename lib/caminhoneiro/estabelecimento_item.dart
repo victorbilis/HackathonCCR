@@ -1,14 +1,18 @@
+import 'package:player/utils/estabelecimento_model.dart';
 import 'package:flutter/material.dart';
 import 'estabelecimento.dart';
 import 'avaliar.dart';
 import 'ofertas.dart';
 
 class EstabelecimentoItem extends StatefulWidget {
+  EstabelecimentoModel estabelecimento;
+  EstabelecimentoItem({this.estabelecimento});
   @override
   _EstabelecimentoItemState createState() => _EstabelecimentoItemState();
 }
 
 class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +62,12 @@ class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
                                   children: <Widget>[
                                     Padding(
                                       padding: EdgeInsets.only(bottom: 10),
-                                      child: Image.asset('assets/restaurante.png'),
+                                      child: Image.network(widget.estabelecimento.imageUrl),
                                     ),
-                                    Text("Tempero de casa",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                                    Text(widget.estabelecimento.name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                                     Padding(
                                      padding: EdgeInsets.all(10),
-                                     child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                                     child: Text(widget.estabelecimento.description,
                                      textAlign: TextAlign.center,
                                      style: TextStyle(fontSize: 16)), 
                                     ),
@@ -73,7 +77,7 @@ class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
                                       children: <Widget>[
                                        Padding(padding: EdgeInsets.only(right: 15),
                                        child: Icon(Icons.location_on,size: 40),),
-                                       Text("BR-1001",style: TextStyle(fontSize: 18),)
+                                       Text(widget.estabelecimento.location,style: TextStyle(fontSize: 18),)
                                       ],
                                     ),
                                     Row(
@@ -82,7 +86,7 @@ class _EstabelecimentoItemState extends State<EstabelecimentoItem> {
                                       children: <Widget>[
                                        Padding(padding: EdgeInsets.only(right: 15),
                                        child: Icon(Icons.phone,size: 40),),
-                                       Text("(19) 999851-7324",style: TextStyle(fontSize: 18),)
+                                       Text(widget.estabelecimento.phone,style: TextStyle(fontSize: 18),)
                                       ],
                                     ),
                                     Row(

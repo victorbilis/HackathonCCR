@@ -56,8 +56,8 @@ class _HomeState extends State<Home> {
       globals.pubKey = pubKey;
       globals.privKey = privKey;
       globals.name = preferences.getString('name');
-      Navigator.pushReplacement(context,
-      MaterialPageRoute(builder: (context) => CaminhoneiroMain()));
+     /* Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => CaminhoneiroMain()));*/
     }
     print(pubKey);
     print(privKey);
