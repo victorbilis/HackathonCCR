@@ -19,6 +19,7 @@
   <a href="#link-como-contribuir">Como Contribuir</a> | 
   <a href="#licença">Licença</a> 
 </h3>
+
 <table>
   <tr>
     <td>
@@ -28,6 +29,7 @@
 <td><img src="https://raw.githubusercontent.com/BrunoEleodoro/learning-reacthooks/master/print3.jpg" width="400"></td>
   </tr>
   </table>
+  
 ## :information_source: Sobre
 
 O aplicativo QSJ da Saúde foi criado para motivar o caminhoneiro e dar condições a estes a terem uma vida mais saudável. O aplicativo integra com os serviços disponibilizados pelo programa Estrada para a Saúde e outros de parceiros do projeto. Com interface simples e de fácil manuseio o caminhoneiro tem acesso a informações sobre todos os serviços destes programas para poder escolher e se programar para realizá-los, feito isso o prestador do serviço lhe disponibilizará um QR CODE que o caminhoneiro lerá com o aplicativo e este ganhará pontos chamados CCR Coins, estes poderão ser trocados por vouchers que poderão ser trocados por produtos e serviços do dia a dia do caminhoneiro em estabelecimentos parceiros.
