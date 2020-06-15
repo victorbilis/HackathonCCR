@@ -6,6 +6,7 @@ import 'package:player/utils/globals.dart' as globals;
 
 import '../utils/ethereum_utils.dart';
 import 'carteira.dart';
+import 'voucher.dart';
 
 class OfertaComprar extends StatefulWidget {
   EstabelecimentoItemModel item;
@@ -258,10 +259,11 @@ class _OfertaComprarState extends State<OfertaComprar> {
                                             print(res);
                                             await Future.delayed(
                                                 Duration(seconds: 5));
-                                            Navigator.pushNamedAndRemoveUntil(
-                                                context,
-                                                "/carteira",
-                                                (r) => false);
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Voucher())
+                                                );
                                           },
                                         ),
                                       ],

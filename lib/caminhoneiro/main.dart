@@ -37,10 +37,23 @@ class _CaminhoneiroMainState extends State<CaminhoneiroMain> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Cabeçalho'),
+              child: Text(''),
               decoration: BoxDecoration(
                 color: Color(0XFF963521),
               ),
+            ),
+            ListTile(
+              title: Row(children: <Widget>[
+                Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                  size: 24.0,
+                ),
+                Text(" Configurações",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)
+              ],),
+              onTap: () {
+                _onSelectItem(0);
+              },
             ),
             ListTile(
               title: Row(children: <Widget>[
