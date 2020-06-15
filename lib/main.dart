@@ -35,8 +35,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController cpfController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController cpfController = TextEditingController(text: "123");
+  TextEditingController passwordController = TextEditingController(text: "123");
   @override
   void initState() {
     // TODO: implement initState
