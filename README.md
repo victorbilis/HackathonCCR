@@ -25,7 +25,6 @@
     <td>
 <img src="https://raw.githubusercontent.com/BrunoEleodoro/learning-reacthooks/master/print1.jpg" width="400">
     </td>
-<td><img src="https://raw.githubusercontent.com/BrunoEleodoro/learning-reacthooks/master/print2.jpg" width="400"></td>
 <td><img src="https://raw.githubusercontent.com/BrunoEleodoro/learning-reacthooks/master/print3.jpg" width="400"></td>
   </tr>
   </table>
